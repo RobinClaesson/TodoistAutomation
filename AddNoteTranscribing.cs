@@ -21,7 +21,6 @@ namespace Todoist_Automation
         ITodoistTokenlessClient tokenlessClient;
         ITodoistClient client;
 
-        long labelID = 0;
 
         public AddNoteTranscribing()
         {
@@ -49,19 +48,7 @@ namespace Todoist_Automation
                 comboBox_Project.Items.Add(proj.Name);
             }
 
-            //Hämtar LabelID för renskrivning
-            var labels = await client.Labels.GetAsync();
-            foreach (var label in labels)
-            {
-                if (label.Name == "Renskrivning")
-                    labelID = label.ItemOrder;
-            }
         }
-
-
-
-
-
 
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -72,7 +59,6 @@ namespace Todoist_Automation
 
         private void button_Add_Click(object sender, EventArgs e)
         {
-
             AddTask();
             this.DialogResult = DialogResult.OK;
         }
@@ -91,21 +77,24 @@ namespace Todoist_Automation
                     var transaction = client.CreateTransaction();
 
                     //Lägger till uppgiften
-                    var taskID = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
+                    //var taskID = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
+                    var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + " / " + dateTimePicker.Value.Month + " @Renskrivning #" + comboBox_Project.Text);
+                    var task = await client.Items.QuickAddAsync(quickAddItem);
 
                     //Lägger till underuppgifter och sätter dom under uppgiften
                     var sub1ID = await transaction.Items.AddAsync(new Item("Scanna orginal", proj.Id));
-                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub1ID, taskID));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub1ID, task.Id));
 
                     var sub2ID = await transaction.Items.AddAsync(new Item("Renskriv", proj.Id));
-                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub2ID, taskID));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub2ID, task.Id));
 
                     var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
-                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, taskID));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, task.Id));
 
                     //Skickar infon till servern
                     await transaction.CommitAsync();
 
+                    MessageBox.Show("Lagt till \"Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month + "\"");
                 }
             }
 

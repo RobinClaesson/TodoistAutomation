@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -86,46 +87,23 @@ namespace Todoist_Automation
                 //Hittar projektet som stämmer överens med valet
                 if (proj.Name == comboBox_Project.Text)
                 {
-
-                    ////Lägger till uppgiften
-                    //var mainTaskID = await client.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
-
-                    ////Hämtar uppgiften för att komma åt dess position i listan
-                    //var mainTaskChildOrder = 0;
-                    //var tasks = await client.Items.GetAsync();
-                    //foreach (Item task in tasks)
-                    //    if (task.Id == mainTaskID)
-                    //        mainTaskChildOrder = (int)task.ChildOrder;
-
-                    ////Lägger till underuppgifter 
-                    //List<ComplexId> subtaskIDs = new List<ComplexId>();
-                    //subtaskIDs.Add(await client.Items.AddAsync(new Item("Scanna orginal", proj.Id)));
-                    ////subtaskIDs.Add(await client.Items.AddAsync(new Item("Renskriva", proj.Id)));
-                    ////subtaskIDs.Add(await client.Items.AddAsync(new Item("Sammanfatta", proj.Id)));
-
-                    ////Hämtar hem alla uppgifterna igen och loopar igenom efter underuppgifterna och uppdaterar dom som en underuppgift
-                    //tasks = await client.Items.GetAsync();
-                    //foreach (Item task in tasks)
-                    //{
-                    //    if(subtaskIDs.Contains(task.Id))
-                    //    {
-                    //        task.ParentId = mainTaskChildOrder;
-                    //        await client.Items.UpdateAsync()
-                    //    }
-                    //}
-
-
-                    //tasks = await client.Items.GetAsync();
-
-
+                    //Skapar en transaktion för att bara behöva skicka infon till serven en gång
                     var transaction = client.CreateTransaction();
 
+                    //Lägger till uppgiften
+                    var taskID = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
 
-                    var taskId = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + 
-                        dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
+                    //Lägger till underuppgifter och sätter dom under uppgiften
+                    var sub1ID = await transaction.Items.AddAsync(new Item("Scanna orginal", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub1ID, taskID));
 
-                    transaction.Items.
+                    var sub2ID = await transaction.Items.AddAsync(new Item("Renskriv", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub2ID, taskID));
 
+                    var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, taskID));
+
+                    //Skickar infon till servern
                     await transaction.CommitAsync();
 
                 }

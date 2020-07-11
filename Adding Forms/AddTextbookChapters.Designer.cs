@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown_Chapters = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_DueDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Chapters)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -138,17 +140,36 @@
             this.panel1.Controls.Add(this.button_Add);
             this.panel1.Controls.Add(this.button_Cancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 179);
+            this.panel1.Location = new System.Drawing.Point(0, 233);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(389, 100);
             this.panel1.TabIndex = 14;
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker_DueDate.Location = new System.Drawing.Point(12, 165);
+            this.dateTimePicker_DueDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePicker_DueDate.Name = "dateTimePicker";
+            this.dateTimePicker_DueDate.Size = new System.Drawing.Size(348, 22);
+            this.dateTimePicker_DueDate.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 146);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(156, 17);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "När vill du ha läst klart?";
             // 
             // AddTextbookChapters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 279);
+            this.ClientSize = new System.Drawing.Size(389, 333);
             this.ControlBox = false;
+            this.Controls.Add(this.dateTimePicker_DueDate);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.numericUpDown_Chapters);
             this.Controls.Add(this.label3);
@@ -158,6 +179,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddTextbookChapters";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till kurslitteratur";
             this.Load += new System.EventHandler(this.AddTextbookChapters_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Chapters)).EndInit();
@@ -178,5 +200,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown_Chapters;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_DueDate;
+        private System.Windows.Forms.Label label4;
     }
 }

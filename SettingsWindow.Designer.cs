@@ -59,7 +59,7 @@
             this.button_Ok.Name = "button_Ok";
             this.button_Ok.Size = new System.Drawing.Size(186, 100);
             this.button_Ok.TabIndex = 2;
-            this.button_Ok.Text = "Ok";
+            this.button_Ok.Text = "Apply";
             this.button_Ok.UseVisualStyleBackColor = true;
             this.button_Ok.Click += new System.EventHandler(this.button_Ok_Click);
             // 
@@ -96,7 +96,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SettingsWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Inställningar";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsWindow_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

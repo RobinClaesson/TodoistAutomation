@@ -45,7 +45,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Projekt";
+            this.label1.Text = "Project";
             // 
             // comboBox_Project
             // 
@@ -63,9 +63,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(11, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 17);
+            this.label3.Size = new System.Drawing.Size(90, 17);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Föreläsningsdatum";
+            this.label3.Text = "Lecture Date";
             // 
             // dateTimePicker
             // 
@@ -83,7 +83,7 @@
             this.button_Add.Name = "button_Add";
             this.button_Add.Size = new System.Drawing.Size(182, 100);
             this.button_Add.TabIndex = 5;
-            this.button_Add.Text = "Lägg Till";
+            this.button_Add.Text = "Add";
             this.button_Add.UseVisualStyleBackColor = true;
             this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
@@ -95,7 +95,7 @@
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(182, 100);
             this.button_Cancel.TabIndex = 5;
-            this.button_Cancel.Text = "Avbryt";
+            this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
             this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
             // 
@@ -126,7 +126,7 @@
             this.MinimizeBox = false;
             this.Name = "AddNoteTranscribing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Lägg till Renskrivning";
+            this.Text = "Add note transcribing";
             this.Load += new System.EventHandler(this.AddNoteTranscribing_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

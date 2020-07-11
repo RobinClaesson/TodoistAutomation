@@ -51,7 +51,7 @@
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(187, 100);
             this.button_Cancel.TabIndex = 6;
-            this.button_Cancel.Text = "Avbryt";
+            this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
             this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
             // 
@@ -63,18 +63,18 @@
             this.button_Add.Name = "button_Add";
             this.button_Add.Size = new System.Drawing.Size(187, 100);
             this.button_Add.TabIndex = 7;
-            this.button_Add.Text = "Lägg Till";
+            this.button_Add.Text = "Add";
             this.button_Add.UseVisualStyleBackColor = true;
             this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(8, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Projekt";
+            this.label1.Text = "Project";
             // 
             // comboBox_Project
             // 
@@ -93,9 +93,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 17);
+            this.label2.Size = new System.Drawing.Size(105, 17);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Bokens namn";
+            this.label2.Text = "Textbook name";
             // 
             // textBox_Book
             // 
@@ -109,9 +109,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 99);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 17);
+            this.label3.Size = new System.Drawing.Size(133, 17);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Antal kapitel";
+            this.label3.Text = "Number of chapters";
             // 
             // numericUpDown_Chapters
             // 
@@ -145,11 +145,11 @@
             this.panel1.Size = new System.Drawing.Size(389, 100);
             this.panel1.TabIndex = 14;
             // 
-            // dateTimePicker
+            // dateTimePicker_DueDate
             // 
             this.dateTimePicker_DueDate.Location = new System.Drawing.Point(12, 165);
             this.dateTimePicker_DueDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker_DueDate.Name = "dateTimePicker";
+            this.dateTimePicker_DueDate.Name = "dateTimePicker_DueDate";
             this.dateTimePicker_DueDate.Size = new System.Drawing.Size(348, 22);
             this.dateTimePicker_DueDate.TabIndex = 15;
             // 
@@ -158,9 +158,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(8, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(156, 17);
+            this.label4.Size = new System.Drawing.Size(62, 17);
             this.label4.TabIndex = 16;
-            this.label4.Text = "När vill du ha läst klart?";
+            this.label4.Text = "Duedate";
             // 
             // AddTextbookChapters
             // 
@@ -180,7 +180,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddTextbookChapters";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Lägg till kurslitteratur";
+            this.Text = "Add textbook to read";
             this.Load += new System.EventHandler(this.AddTextbookChapters_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Chapters)).EndInit();
             this.panel1.ResumeLayout(false);

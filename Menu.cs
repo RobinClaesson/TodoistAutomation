@@ -45,25 +45,32 @@ namespace Todoist_Automation
             writer.Close();
         }
 
+
+        //Acces the Todoist servers using the users private API-Token
+        //No usernames or passwords needed  
         private async void LoginToTodoist()
         {
-            SetButtonEnabled(false);
-            label_loading.Text = "Laddar Todoist data...";
+            //Hides the buttons until connection with server
+            SetButtonVisability(false);
+            label_loading.Text = "Loading Todoist Data";
 
             try
             {
+                //Connects to server
                 client = new TodoistClient(settings["Todoist"]["token"]);
 
+                //Test the connection by fetching the username and displaying it
                 var resources = await client.GetResourcesAsync();
-                label_loading.Text = "Inloggad som " + resources.UserInfo.FullName;
-                SetButtonEnabled(true);
+                label_loading.Text = "Loged in as " + resources.UserInfo.FullName;
+                SetButtonVisability(true);
 
             }
 
             catch
             {
-                MessageBox.Show("Todoist login misslyckat. Kontrollera todoist api token");
-                label_loading.Text = "Todoist login misslyckat";
+                //Failed connection
+                MessageBox.Show("Failed to load Todoist data, check API-Token");
+                label_loading.Text = "Load failed";
 
             }
         }
@@ -75,19 +82,22 @@ namespace Todoist_Automation
             LoginToTodoist();
         }
 
-        private void SetButtonEnabled(bool enabled)
+        //Hides every button except for the settingsbutton      
+        private void SetButtonVisability(bool visable)
         {
             foreach (Control control in Controls)
             {
                 if (control is Button && !control.Name.Contains("Setting"))
-                    control.Visible = enabled;
+                    control.Visible = visable;
             }
+
+            label_ask.Visible = visable;
         }
 
         private void button_Notes_Click(object sender, EventArgs e)
         {
+            
             AddNoteTranscribing addNotes = new AddNoteTranscribing(client);
-
             addNotes.ShowDialog();
         }
 
@@ -96,11 +106,11 @@ namespace Todoist_Automation
             SettingsWindow settingsWindow = new SettingsWindow(settings);
             settingsWindow.ShowDialog();
 
+            //Resets the connection to Todoist server if the settings are changed
             if (settingsWindow.DialogResult == DialogResult.OK)
             {
                 LoginToTodoist();
             }
-
 
         }
 

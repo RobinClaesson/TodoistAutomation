@@ -16,6 +16,7 @@ namespace Todoist_Automation
 
     public partial class AddNoteTranscribing : Form
     {
+
         ITodoistClient client;
 
         public AddNoteTranscribing(ITodoistClient client)
@@ -31,14 +32,15 @@ namespace Todoist_Automation
 
         private async void LoadTodoistData()
         {
-
-            //Hämtar alla projectnamn och lägger till dom som alternativ
+            //Loads all the users projects to a targetlist
             var projects = await client.Projects.GetAsync();
             foreach (var proj in projects)
             {
                 comboBox_Project.Items.Add(proj.Name);
             }
 
+            if (comboBox_Project.Items.Count > 0)
+                comboBox_Project.SelectedIndex = 0;
         }
 
 
@@ -55,28 +57,26 @@ namespace Todoist_Automation
                 this.DialogResult = DialogResult.OK;
             }
 
-            else MessageBox.Show("Välj ett projekt");
+            else MessageBox.Show("Choose a project");
         }
 
 
         private async void AddTask()
         {
-            //Hämtar alla projekt
+            //Loads all projects and searches for the selected project
             var projects = await client.Projects.GetAsync();
             foreach (var proj in projects)
             {
-                //Hittar projektet som stämmer överens med valet
                 if (proj.Name == comboBox_Project.Text)
                 {
-                    //Skapar en transaktion för att bara behöva skicka infon till serven en gång
+                    //Create a transaction to lower the times we request and send data to the server
                     var transaction = client.CreateTransaction();
 
-                    //Lägger till uppgiften
-                    //var taskID = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
-                    var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + " / " + dateTimePicker.Value.Month + " @Renskrivning #" + comboBox_Project.Text);
+                    //Adding the main task
+                     var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + " / " + dateTimePicker.Value.Month + " @Renskrivning #" + comboBox_Project.Text);
                     var task = await client.Items.QuickAddAsync(quickAddItem);
 
-                    //Lägger till underuppgifter och sätter dom under uppgiften
+                    //Adds subsaks and moves them under the main task
                     var sub1ID = await transaction.Items.AddAsync(new Item("Scanna orginal", proj.Id));
                     await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub1ID, task.Id));
 
@@ -86,10 +86,10 @@ namespace Todoist_Automation
                     var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
                     await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, task.Id));
 
-                    //Skickar infon till servern
+                    //Sends the rest of the data to server
                     await transaction.CommitAsync();
 
-                    MessageBox.Show("Lagt till \"Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month + "\"");
+                    MessageBox.Show("Added \"Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month + "\"");
                 }
             }
 

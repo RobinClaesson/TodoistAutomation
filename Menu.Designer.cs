@@ -32,7 +32,7 @@
             this.button_Settings = new System.Windows.Forms.Button();
             this.label_loading = new System.Windows.Forms.Label();
             this.button_Notes = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_ask = new System.Windows.Forms.Label();
             this.button_Book = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -43,7 +43,7 @@
             this.button_Settings.Name = "button_Settings";
             this.button_Settings.Size = new System.Drawing.Size(340, 31);
             this.button_Settings.TabIndex = 0;
-            this.button_Settings.Text = "Inställningar";
+            this.button_Settings.Text = "Settings";
             this.button_Settings.UseVisualStyleBackColor = true;
             this.button_Settings.Click += new System.EventHandler(this.button_Settings_Click);
             // 
@@ -53,9 +53,9 @@
             this.label_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_loading.Location = new System.Drawing.Point(7, 9);
             this.label_loading.Name = "label_loading";
-            this.label_loading.Size = new System.Drawing.Size(192, 20);
+            this.label_loading.Size = new System.Drawing.Size(204, 20);
             this.label_loading.TabIndex = 1;
-            this.label_loading.Text = "Laddar Todoist data...";
+            this.label_loading.Text = "Loading Todoist Data...";
             // 
             // button_Notes
             // 
@@ -63,18 +63,18 @@
             this.button_Notes.Name = "button_Notes";
             this.button_Notes.Size = new System.Drawing.Size(316, 54);
             this.button_Notes.TabIndex = 2;
-            this.button_Notes.Text = "Renskrivning av anteckningar";
+            this.button_Notes.Text = "Note Transcribing";
             this.button_Notes.UseVisualStyleBackColor = true;
             this.button_Notes.Click += new System.EventHandler(this.button_Notes_Click);
             // 
-            // label1
+            // label_ask
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(252, 17);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Vilken typ av uppgifter vill du lägga till?";
+            this.label_ask.AutoSize = true;
+            this.label_ask.Location = new System.Drawing.Point(12, 55);
+            this.label_ask.Name = "label_ask";
+            this.label_ask.Size = new System.Drawing.Size(256, 17);
+            this.label_ask.TabIndex = 3;
+            this.label_ask.Text = "What kind of tasks do you want to add?";
             // 
             // button_Book
             // 
@@ -82,7 +82,7 @@
             this.button_Book.Name = "button_Book";
             this.button_Book.Size = new System.Drawing.Size(316, 54);
             this.button_Book.TabIndex = 4;
-            this.button_Book.Text = "Läsa kurslitteratur";
+            this.button_Book.Text = "Textbook Reading";
             this.button_Book.UseVisualStyleBackColor = true;
             this.button_Book.Click += new System.EventHandler(this.button_Book_Click);
             // 
@@ -92,7 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 456);
             this.Controls.Add(this.button_Book);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_ask);
             this.Controls.Add(this.button_Notes);
             this.Controls.Add(this.label_loading);
             this.Controls.Add(this.button_Settings);
@@ -101,7 +101,7 @@
             this.MaximizeBox = false;
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Todoist Hjälp";
+            this.Text = "Todoist Automation";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -113,7 +113,7 @@
         private System.Windows.Forms.Button button_Settings;
         private System.Windows.Forms.Label label_loading;
         private System.Windows.Forms.Button button_Notes;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_ask;
         private System.Windows.Forms.Button button_Book;
     }
 }

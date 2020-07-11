@@ -103,5 +103,11 @@ namespace Todoist_Automation
 
 
         }
+
+        private void button_Book_Click(object sender, EventArgs e)
+        {
+            AddTextbookChapters addBook = new AddTextbookChapters(client);
+            addBook.ShowDialog();
+        }
     }
 }

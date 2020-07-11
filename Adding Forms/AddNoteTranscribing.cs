@@ -49,8 +49,13 @@ namespace Todoist_Automation
 
         private void button_Add_Click(object sender, EventArgs e)
         {
-            AddTask();
-            this.DialogResult = DialogResult.OK;
+            if (comboBox_Project.Text != "")
+            {
+                AddTask();
+                this.DialogResult = DialogResult.OK;
+            }
+
+            else MessageBox.Show("Välj ett projekt");
         }
 
 

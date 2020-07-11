@@ -33,6 +33,7 @@
             this.label_loading = new System.Windows.Forms.Label();
             this.button_Notes = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button_Book = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_Settings
@@ -75,11 +76,22 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Vilken typ av uppgifter vill du lägga till?";
             // 
+            // button_Book
+            // 
+            this.button_Book.Location = new System.Drawing.Point(15, 135);
+            this.button_Book.Name = "button_Book";
+            this.button_Book.Size = new System.Drawing.Size(316, 54);
+            this.button_Book.TabIndex = 4;
+            this.button_Book.Text = "Läsa kurslitteratur";
+            this.button_Book.UseVisualStyleBackColor = true;
+            this.button_Book.Click += new System.EventHandler(this.button_Book_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(340, 456);
+            this.Controls.Add(this.button_Book);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_Notes);
             this.Controls.Add(this.label_loading);
@@ -102,5 +114,6 @@
         private System.Windows.Forms.Label label_loading;
         private System.Windows.Forms.Button button_Notes;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_Book;
     }
 }

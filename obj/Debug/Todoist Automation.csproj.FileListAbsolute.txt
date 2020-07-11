@@ -34,3 +34,4 @@ C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\INIFileParser.dll
 C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\INIFileParser.xml
 C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.Menu.resources
 C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.SettingsWindow.resources
+C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.AddTextbookChapters.resources

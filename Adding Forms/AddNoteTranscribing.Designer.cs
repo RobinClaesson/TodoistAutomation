@@ -34,6 +34,8 @@
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.button_Add = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -75,10 +77,11 @@
             // 
             // button_Add
             // 
-            this.button_Add.Location = new System.Drawing.Point(15, 130);
+            this.button_Add.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_Add.Location = new System.Drawing.Point(0, 0);
             this.button_Add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(172, 55);
+            this.button_Add.Size = new System.Drawing.Size(182, 100);
             this.button_Add.TabIndex = 5;
             this.button_Add.Text = "Lägg Till";
             this.button_Add.UseVisualStyleBackColor = true;
@@ -86,23 +89,33 @@
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(193, 130);
+            this.button_Cancel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button_Cancel.Location = new System.Drawing.Point(197, 0);
             this.button_Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(172, 55);
+            this.button_Cancel.Size = new System.Drawing.Size(182, 100);
             this.button_Cancel.TabIndex = 5;
             this.button_Cancel.Text = "Avbryt";
             this.button_Cancel.UseVisualStyleBackColor = true;
             this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button_Add);
+            this.panel1.Controls.Add(this.button_Cancel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 132);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(379, 100);
+            this.panel1.TabIndex = 6;
+            // 
             // AddNoteTranscribing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 235);
+            this.ClientSize = new System.Drawing.Size(379, 232);
             this.ControlBox = false;
-            this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.button_Add);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox_Project);
@@ -115,6 +128,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till Renskrivning";
             this.Load += new System.EventHandler(this.AddNoteTranscribing_Load);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,6 +142,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Button button_Add;
         private System.Windows.Forms.Button button_Cancel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

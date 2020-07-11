@@ -16,30 +16,21 @@ namespace Todoist_Automation
 
     public partial class AddNoteTranscribing : Form
     {
-
-        string tdEmail = "robin.claesson@gmail.com", tdPassword = "psom@un2krok0PREA";
-        ITodoistTokenlessClient tokenlessClient;
         ITodoistClient client;
 
-
-        public AddNoteTranscribing()
+        public AddNoteTranscribing(ITodoistClient client)
         {
             InitializeComponent();
+            this.client = client;
         }
 
         private void AddNoteTranscribing_Load(object sender, EventArgs e)
         {
             LoadTodoistData();
-
-
         }
 
         private async void LoadTodoistData()
         {
-            //Loggar in på Todoist
-            //TODO: Logga in med token istället för email
-            tokenlessClient = new TodoistTokenlessClient();
-            client = await tokenlessClient.LoginAsync(tdEmail, tdPassword);
 
             //Hämtar alla projectnamn och lägger till dom som alternativ
             var projects = await client.Projects.GetAsync();
@@ -54,7 +45,6 @@ namespace Todoist_Automation
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
 
         private void button_Add_Click(object sender, EventArgs e)

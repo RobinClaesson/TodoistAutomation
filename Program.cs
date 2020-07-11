@@ -16,7 +16,7 @@ namespace Todoist_Automation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddNoteTranscribing());
+            Application.Run(new Menu());
         }
     }
 }

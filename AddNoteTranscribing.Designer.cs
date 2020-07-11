@@ -99,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 254);
+            this.ClientSize = new System.Drawing.Size(379, 235);
             this.ControlBox = false;
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Add);
@@ -112,6 +112,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddNoteTranscribing";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Lägg till Renskrivning";
             this.Load += new System.EventHandler(this.AddNoteTranscribing_Load);
             this.ResumeLayout(false);

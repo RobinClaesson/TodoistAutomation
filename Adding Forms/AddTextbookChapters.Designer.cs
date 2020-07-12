@@ -37,8 +37,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown_Chapters = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dateTimePicker_DueDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_Due = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateTimePicker_Start = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Chapters)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -140,35 +142,53 @@
             this.panel1.Controls.Add(this.button_Add);
             this.panel1.Controls.Add(this.button_Cancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 233);
+            this.panel1.Location = new System.Drawing.Point(0, 301);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(389, 100);
             this.panel1.TabIndex = 14;
             // 
-            // dateTimePicker_DueDate
+            // dateTimePicker_Due
             // 
-            this.dateTimePicker_DueDate.Location = new System.Drawing.Point(12, 165);
-            this.dateTimePicker_DueDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker_DueDate.Name = "dateTimePicker_DueDate";
-            this.dateTimePicker_DueDate.Size = new System.Drawing.Size(348, 22);
-            this.dateTimePicker_DueDate.TabIndex = 15;
+            this.dateTimePicker_Due.Location = new System.Drawing.Point(11, 208);
+            this.dateTimePicker_Due.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePicker_Due.Name = "dateTimePicker_Due";
+            this.dateTimePicker_Due.Size = new System.Drawing.Size(348, 22);
+            this.dateTimePicker_Due.TabIndex = 15;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 146);
+            this.label4.Location = new System.Drawing.Point(8, 189);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 17);
+            this.label4.Size = new System.Drawing.Size(66, 17);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Duedate";
+            this.label4.Text = "Due date";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 17);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Start date";
+            // 
+            // dateTimePicker_Start
+            // 
+            this.dateTimePicker_Start.Location = new System.Drawing.Point(12, 164);
+            this.dateTimePicker_Start.Name = "dateTimePicker_Start";
+            this.dateTimePicker_Start.Size = new System.Drawing.Size(348, 22);
+            this.dateTimePicker_Start.TabIndex = 18;
             // 
             // AddTextbookChapters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 333);
+            this.ClientSize = new System.Drawing.Size(389, 401);
             this.ControlBox = false;
-            this.Controls.Add(this.dateTimePicker_DueDate);
+            this.Controls.Add(this.dateTimePicker_Start);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dateTimePicker_Due);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.numericUpDown_Chapters);
@@ -200,7 +220,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown_Chapters;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_DueDate;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_Due;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_Start;
     }
 }

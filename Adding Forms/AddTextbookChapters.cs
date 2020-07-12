@@ -25,7 +25,7 @@ namespace Todoist_Automation
         private async void LoadTodoistData()
         {
 
-            //Hämtar alla projectnamn och lägger till dom som alternativ
+            //Gets all projectnames
             var projects = await client.Projects.GetAsync();
             foreach (var proj in projects)
             {
@@ -42,7 +42,7 @@ namespace Todoist_Automation
                 this.DialogResult = DialogResult.OK;
             }
 
-            else MessageBox.Show("Välj ett projekt och namge boken");
+            else MessageBox.Show("Choose a project and bookname");
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -91,42 +91,41 @@ namespace Todoist_Automation
 
         private async void AddTask()
         {
-            //Hämtar alla projekt
+            //Gets all projects and finds the choosen
             var projects = await client.Projects.GetAsync();
             foreach (var proj in projects)
             {
-                //Hittar projektet som stämmer överens med valet
+                
                 if (proj.Name == comboBox_Project.Text)
                 {
-                    //Skapar en transaktion för att minimera info till och från servern 
+                    //Creates a transaction to cut down on times we contact server
                     var transaction = client.CreateTransaction();
 
-                    //Lägger till uppgiften
-                    //var taskID = await transaction.Items.AddAsync(new Item("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + "/" + dateTimePicker.Value.Month, proj.Id));
+                    //Adds main task
                     var quickAddItem = new QuickAddItem("Läs \"" + textBox_Book.Text + "\" @Läsning #" + comboBox_Project.Text);
                     var task = await client.Items.QuickAddAsync(quickAddItem);
-                    task.DueDate = new DueDate(dateTimePicker_DueDate.Value.Day + "/" + dateTimePicker_DueDate.Value.Month);
+                    task.DueDate = new DueDate(dateTimePicker_Due.Value.Day + "/" + dateTimePicker_Due.Value.Month);
                     await client.Items.UpdateAsync(task);
 
-                    //Räknar ut hur många arbetsdagar per kapitel jag har
-                    int daysToDeadline = BusinessDaysUntil(DateTime.Now.Date, dateTimePicker_DueDate.Value.Date);
+                    //Calculates how many days we have per chapter
+                    int daysToDeadline = BusinessDaysUntil(dateTimePicker_Start.Value.Date, dateTimePicker_Due.Value.Date);
                     int daysPerChapter = daysToDeadline / (int)numericUpDown_Chapters.Value;
 
                     var dueDate = DateTime.Now.Date;
 
                     for (int i = 1; i <= numericUpDown_Chapters.Value; i++)
                     {
-                        //Flyttar fram deadline för kapitlet
+                        //Moves the duedate forward
                         dueDate = dueDate.AddDays(daysPerChapter);
 
-                        //Ser till att deadline inte är på en lördag eller en söndag
+                        //Ignores saturdays and sundays
                         if (dueDate.DayOfWeek == System.DayOfWeek.Saturday)
                             dueDate = dueDate.AddDays(2);
                         else if (dueDate.DayOfWeek == System.DayOfWeek.Sunday)
                             dueDate = dueDate.AddDays(1);
 
-                        //Lägger till kapitlet med underuppgifter
 
+                        //Adds the chapter as a subtask with suptasks of its own
                         var quickAddSub = new QuickAddItem("Kapitel " + i + " #" + comboBox_Project.Text);
                         var subtask = await client.Items.QuickAddAsync(quickAddSub);
                         subtask.DueDate = new DueDate(dueDate.Day + "/" + dueDate.Month);
@@ -141,10 +140,10 @@ namespace Todoist_Automation
                         await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(summaryTaskID, subtask.Id));
                     }
 
-                    //Skickar infon till servern
+                    //Sends the unsynced changes to the server
                     await transaction.CommitAsync();
 
-                    MessageBox.Show("Lagt till \"Läs " + textBox_Book.Text + "\"");
+                    MessageBox.Show("Added \"Läs " + textBox_Book.Text + "\"");
 
                 }
             }

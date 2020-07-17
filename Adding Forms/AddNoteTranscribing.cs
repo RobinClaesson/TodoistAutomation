@@ -73,7 +73,7 @@ namespace Todoist_Automation
                     var transaction = client.CreateTransaction();
 
                     //Adding the main task
-                     var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + " / " + dateTimePicker.Value.Month + " @Renskrivning #" + comboBox_Project.Text);
+                     var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + comboBox_Project.Text + " " + dateTimePicker.Value.Day + " / " + dateTimePicker.Value.Month + " @Renskrivning @KTH #" + comboBox_Project.Text);
                     var task = await client.Items.QuickAddAsync(quickAddItem);
 
                     //Adds subsaks and moves them under the main task

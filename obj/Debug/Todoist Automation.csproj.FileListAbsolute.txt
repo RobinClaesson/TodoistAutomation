@@ -14,24 +14,3 @@ C:\Users\robin\GitHub\TodoistAutomation\Todoist Automation\bin\Debug\Newtonsoft.
 C:\Users\robin\GitHub\TodoistAutomation\Todoist Automation\bin\Debug\Todoist.Net.pdb
 C:\Users\robin\GitHub\TodoistAutomation\Todoist Automation\bin\Debug\Todoist.Net.xml
 C:\Users\robin\GitHub\TodoistAutomation\Todoist Automation\obj\Debug\Todoist Automation.csproj.CopyComplete
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist Automation.exe.config
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist Automation.exe
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist Automation.pdb
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\INIFileParser.dll
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Newtonsoft.Json.dll
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist.Net.dll
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\INIFileParser.xml
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Newtonsoft.Json.xml
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist.Net.pdb
-C:\Users\robin\GitHub\TodoistAutomation\bin\Debug\Todoist.Net.xml
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.csprojAssemblyReference.cache
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.AddNoteTranscribing.resources
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.AddTextbookChapters.resources
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.Menu.resources
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.Properties.Resources.resources
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist_Automation.SettingsWindow.resources
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.csproj.GenerateResource.cache
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.csproj.CoreCompileInputs.cache
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.csproj.CopyComplete
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.exe
-C:\Users\robin\GitHub\TodoistAutomation\obj\Debug\Todoist Automation.pdb

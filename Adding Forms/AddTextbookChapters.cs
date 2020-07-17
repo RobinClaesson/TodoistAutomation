@@ -95,14 +95,14 @@ namespace Todoist_Automation
             var projects = await client.Projects.GetAsync();
             foreach (var proj in projects)
             {
-                
+
                 if (proj.Name == comboBox_Project.Text)
                 {
                     //Creates a transaction to cut down on times we contact server
                     var transaction = client.CreateTransaction();
 
                     //Adds main task
-                    var quickAddItem = new QuickAddItem("Läs \"" + textBox_Book.Text + "\" @Läsning #" + comboBox_Project.Text);
+                    var quickAddItem = new QuickAddItem("Läs \"" + textBox_Book.Text + "\" @Läsning @KTH #" + comboBox_Project.Text);
                     var task = await client.Items.QuickAddAsync(quickAddItem);
                     task.DueDate = new DueDate(dateTimePicker_Due.Value.Day + "/" + dateTimePicker_Due.Value.Month);
                     await client.Items.UpdateAsync(task);
@@ -111,12 +111,12 @@ namespace Todoist_Automation
                     int daysToDeadline = BusinessDaysUntil(dateTimePicker_Start.Value.Date, dateTimePicker_Due.Value.Date);
                     int daysPerChapter = daysToDeadline / (int)numericUpDown_Chapters.Value;
 
-                    var dueDate = DateTime.Now.Date;
+                    var dueDate = dateTimePicker_Start.Value;
 
                     for (int i = 1; i <= numericUpDown_Chapters.Value; i++)
                     {
                         //Moves the duedate forward
-                        dueDate = dueDate.AddDays(daysPerChapter);
+                        dueDate = dueDate.AddDays(daysPerChapter + (i % 2) * (daysToDeadline % (int)numericUpDown_Chapters.Value));
 
                         //Ignores saturdays and sundays
                         if (dueDate.DayOfWeek == System.DayOfWeek.Saturday)

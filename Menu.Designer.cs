@@ -82,7 +82,7 @@
             this.button_Book.Name = "button_Book";
             this.button_Book.Size = new System.Drawing.Size(316, 54);
             this.button_Book.TabIndex = 4;
-            this.button_Book.Text = "Textbook Reading";
+            this.button_Book.Text = "Reading";
             this.button_Book.UseVisualStyleBackColor = true;
             this.button_Book.Click += new System.EventHandler(this.button_Book_Click);
             // 

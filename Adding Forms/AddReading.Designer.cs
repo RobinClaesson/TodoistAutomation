@@ -1,6 +1,6 @@
 ﻿namespace Todoist_Automation
 {
-    partial class AddTextbookChapters
+    partial class AddReading
     {
         /// <summary>
         /// Required designer variable.
@@ -95,9 +95,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 17);
+            this.label2.Size = new System.Drawing.Size(131, 17);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Textbook name";
+            this.label2.Text = "Textbook/text name";
             // 
             // textBox_Book
             // 
@@ -169,9 +169,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(9, 144);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 17);
+            this.label5.Size = new System.Drawing.Size(127, 17);
             this.label5.TabIndex = 17;
-            this.label5.Text = "Start date";
+            this.label5.Text = "Start reading when";
             // 
             // dateTimePicker_Start
             // 
@@ -200,7 +200,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddTextbookChapters";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add textbook to read";
+            this.Text = "Add text or book to read";
             this.Load += new System.EventHandler(this.AddTextbookChapters_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Chapters)).EndInit();
             this.panel1.ResumeLayout(false);

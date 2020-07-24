@@ -61,17 +61,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adding Forms\AddNoteTranscribing.cs">
+    <Compile Include="Adding Forms\AddNotes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Adding Forms\AddNoteTranscribing.Designer.cs">
-      <DependentUpon>AddNoteTranscribing.cs</DependentUpon>
+    <Compile Include="Adding Forms\AddNotes.Designer.cs">
+      <DependentUpon>AddNotes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Adding Forms\AddTextbookChapters.cs">
+    <Compile Include="Adding Forms\AddReading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Adding Forms\AddTextbookChapters.Designer.cs">
-      <DependentUpon>AddTextbookChapters.cs</DependentUpon>
+    <Compile Include="Adding Forms\AddReading.Designer.cs">
+      <DependentUpon>AddReading.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -87,11 +87,11 @@
     <Compile Include="SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Adding Forms\AddNoteTranscribing.resx">
-      <DependentUpon>AddNoteTranscribing.cs</DependentUpon>
+    <EmbeddedResource Include="Adding Forms\AddNotes.resx">
+      <DependentUpon>AddNotes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Adding Forms\AddTextbookChapters.resx">
-      <DependentUpon>AddTextbookChapters.cs</DependentUpon>
+    <EmbeddedResource Include="Adding Forms\AddReading.resx">
+      <DependentUpon>AddReading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

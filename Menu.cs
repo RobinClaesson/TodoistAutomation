@@ -99,6 +99,11 @@ namespace Todoist_Automation
             
             AddNoteTranscribing addNotes = new AddNoteTranscribing(client);
             addNotes.ShowDialog();
+
+            if(addNotes.DialogResult == DialogResult.OK)
+            {
+                AddNotesTask(addNotes.ProjectName, addNotes.LectureDate);
+            }
         }
 
         private void button_Settings_Click(object sender, EventArgs e)
@@ -116,8 +121,150 @@ namespace Todoist_Automation
 
         private void button_Book_Click(object sender, EventArgs e)
         {
-            AddTextbookChapters addBook = new AddTextbookChapters(client);
-            addBook.ShowDialog();
+            AddReading addReading = new AddReading(client);
+            addReading.ShowDialog();
+
+            if(addReading.DialogResult == DialogResult.OK)
+            {
+                AddReadingTask(addReading.ProjectName, addReading.BookName, addReading.StartDate, addReading.DueDate, addReading.Chapters);
+            }
+        }
+
+
+        public async void AddNotesTask(string projectName, DateTime lectureDate)
+        {
+            //Loads all projects and searches for the selected project
+            var projects = await client.Projects.GetAsync();
+            foreach (var proj in projects)
+            {
+                if (proj.Name == projectName)
+                {
+                    //Create a transaction to lower the times we request and send data to the server
+                    var transaction = client.CreateTransaction();
+
+                    //Adding the main task
+                    var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + projectName + " " + lectureDate.Day + " / " + lectureDate.Month 
+                                                     + " @Renskrivning @KTH #" + projectName);
+                    
+
+                    var task = await client.Items.QuickAddAsync(quickAddItem);
+
+                    //Adds subsaks and moves them under the main task
+                    var sub1ID = await transaction.Items.AddAsync(new Item("Scanna orginal", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub1ID, task.Id));
+
+                    var sub2ID = await transaction.Items.AddAsync(new Item("Renskriv", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub2ID, task.Id));
+
+                    var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
+                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, task.Id));
+
+                    //Sends the rest of the data to server
+                    await transaction.CommitAsync();
+
+                    MessageBox.Show("Added \"Renskrivning föreläsning " + projectName + " " + lectureDate.Day + "/" + lectureDate.Month + "\"");
+                }
+            }
+
+        }
+
+        public async void AddReadingTask(string projectName, string bookName, DateTime startDate, DateTime dueDate, int chapters)
+        {
+            //Gets all projects and finds the choosen
+            var projects = await client.Projects.GetAsync();
+            foreach (var proj in projects)
+            {
+
+                if (proj.Name == projectName)
+                {
+                    //Creates a transaction to cut down on times we contact server
+                    var transaction = client.CreateTransaction();
+
+                    //Adds main task
+                    var quickAddItem = new QuickAddItem("Läs \"" + bookName + "\" @Läsning @KTH #" + projectName);
+                    var task = await client.Items.QuickAddAsync(quickAddItem);
+                    task.DueDate = new DueDate(dueDate.Day + "/" + dueDate.Month);
+                    await client.Items.UpdateAsync(task);
+
+                    //Calculates how many days we have per chapter
+                    int daysToDeadline = BusinessDaysUntil(startDate.Date, dueDate.Date);
+                    int daysPerChapter = daysToDeadline / chapters;
+
+                    var nextDueDate = startDate;
+
+                    for (int i = 1; i <= chapters; i++)
+                    {
+                        //Moves the duedate forward
+                        nextDueDate = nextDueDate.AddDays(daysPerChapter + (i % 2) * (daysToDeadline % chapters));
+
+                        //Ignores saturdays and sundays
+                        if (nextDueDate.DayOfWeek == System.DayOfWeek.Saturday)
+                            nextDueDate = nextDueDate.AddDays(2);
+                        else if (nextDueDate.DayOfWeek == System.DayOfWeek.Sunday)
+                            nextDueDate = nextDueDate.AddDays(1);
+
+
+                        //Adds the chapter as a subtask with suptasks of its own
+                        var quickAddSub = new QuickAddItem("Kapitel " + i + " #" + projectName);
+                        var subtask = await client.Items.QuickAddAsync(quickAddSub);
+                        subtask.DueDate = new DueDate(nextDueDate.Day + "/" + nextDueDate.Month);
+                        await client.Items.UpdateAsync(subtask);
+
+                        await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(subtask.Id, task.Id));
+
+                        var readTaskID = await transaction.Items.AddAsync(new Item("Läsa", proj.Id));
+                        await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(readTaskID, subtask.Id));
+
+                        var summaryTaskID = await transaction.Items.AddAsync(new Item("Sammanfatta", proj.Id));
+                        await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(summaryTaskID, subtask.Id));
+                    }
+
+                    //Sends the unsynced changes to the server
+                    await transaction.CommitAsync();
+
+                    MessageBox.Show("Added \"Läs " + bookName + "\"");
+
+                }
+            }
+        }
+
+        private int BusinessDaysUntil(DateTime firstDay, DateTime lastDay)
+        {
+            //https://stackoverflow.com/questions/1617049/calculate-the-number-of-business-days-between-two-dates
+
+            firstDay = firstDay.Date;
+            lastDay = lastDay.Date;
+            if (firstDay > lastDay)
+                throw new ArgumentException("Incorrect last day " + lastDay);
+
+            TimeSpan span = lastDay - firstDay;
+            int businessDays = span.Days + 1;
+            int fullWeekCount = businessDays / 7;
+            // find out if there are weekends during the time exceedng the full weeks
+            if (businessDays > fullWeekCount * 7)
+            {
+                // we are here to find out if there is a 1-day or 2-days weekend
+                // in the time interval remaining after subtracting the complete weeks
+                int firstDayOfWeek = (int)firstDay.DayOfWeek;
+                int lastDayOfWeek = (int)lastDay.DayOfWeek;
+                if (lastDayOfWeek < firstDayOfWeek)
+                    lastDayOfWeek += 7;
+                if (firstDayOfWeek <= 6)
+                {
+                    if (lastDayOfWeek >= 7)// Both Saturday and Sunday are in the remaining time interval
+                        businessDays -= 2;
+                    else if (lastDayOfWeek >= 6)// Only Saturday is in the remaining time interval
+                        businessDays -= 1;
+                }
+                else if (firstDayOfWeek <= 7 && lastDayOfWeek >= 7)// Only Sunday is in the remaining time interval
+                    businessDays -= 1;
+            }
+
+            // subtract the weekends during the full weeks in the interval
+            businessDays -= fullWeekCount + fullWeekCount;
+
+
+            return businessDays;
         }
     }
 }

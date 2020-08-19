@@ -59,30 +59,30 @@
             // 
             // button_Notes
             // 
-            this.button_Notes.Location = new System.Drawing.Point(12, 75);
+            this.button_Notes.Location = new System.Drawing.Point(11, 61);
             this.button_Notes.Name = "button_Notes";
             this.button_Notes.Size = new System.Drawing.Size(316, 54);
             this.button_Notes.TabIndex = 2;
-            this.button_Notes.Text = "Note Transcribing";
+            this.button_Notes.Text = " Add Note Transcribing Tasks";
             this.button_Notes.UseVisualStyleBackColor = true;
             this.button_Notes.Click += new System.EventHandler(this.button_Notes_Click);
             // 
             // label_ask
             // 
             this.label_ask.AutoSize = true;
-            this.label_ask.Location = new System.Drawing.Point(12, 55);
+            this.label_ask.Location = new System.Drawing.Point(8, 41);
             this.label_ask.Name = "label_ask";
-            this.label_ask.Size = new System.Drawing.Size(256, 17);
+            this.label_ask.Size = new System.Drawing.Size(93, 17);
             this.label_ask.TabIndex = 3;
-            this.label_ask.Text = "What kind of tasks do you want to add?";
+            this.label_ask.Text = "Select action:";
             // 
             // button_Book
             // 
-            this.button_Book.Location = new System.Drawing.Point(15, 135);
+            this.button_Book.Location = new System.Drawing.Point(11, 121);
             this.button_Book.Name = "button_Book";
             this.button_Book.Size = new System.Drawing.Size(316, 54);
             this.button_Book.TabIndex = 4;
-            this.button_Book.Text = "Reading";
+            this.button_Book.Text = "Add Reading Tasks";
             this.button_Book.UseVisualStyleBackColor = true;
             this.button_Book.Click += new System.EventHandler(this.button_Book_Click);
             // 

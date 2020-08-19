@@ -77,8 +77,6 @@ namespace Todoist_Automation
 
         private void Menu_Load(object sender, EventArgs e)
         {
-
-
             LoginToTodoist();
         }
 
@@ -96,11 +94,11 @@ namespace Todoist_Automation
 
         private void button_Notes_Click(object sender, EventArgs e)
         {
-            
+
             AddNoteTranscribing addNotes = new AddNoteTranscribing(client);
             addNotes.ShowDialog();
 
-            if(addNotes.DialogResult == DialogResult.OK)
+            if (addNotes.DialogResult == DialogResult.OK)
             {
                 AddNotesTask(addNotes.ProjectName, addNotes.LectureDate);
             }
@@ -124,9 +122,9 @@ namespace Todoist_Automation
             AddReading addReading = new AddReading(client);
             addReading.ShowDialog();
 
-            if(addReading.DialogResult == DialogResult.OK)
+            if (addReading.DialogResult == DialogResult.OK)
             {
-                AddReadingTask(addReading.ProjectName, addReading.BookName, addReading.StartDate, addReading.DueDate, addReading.Chapters);
+                AddReadingTask(addReading.ProjectName, addReading.BookName, addReading.StartDate, addReading.DueDate, addReading.LastChapter, addReading.FirstChapter);
             }
         }
 
@@ -143,9 +141,9 @@ namespace Todoist_Automation
                     var transaction = client.CreateTransaction();
 
                     //Adding the main task
-                    var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + projectName + " " + lectureDate.Day + " / " + lectureDate.Month 
-                                                     + " @Renskrivning @KTH #" + projectName);
-                    
+                    var quickAddItem = new QuickAddItem("Renskrivning föreläsning " + projectName + " " + lectureDate.Day + " / " + lectureDate.Month
+                                                     + " @Renskrivning #" + projectName);
+
 
                     var task = await client.Items.QuickAddAsync(quickAddItem);
 
@@ -168,7 +166,7 @@ namespace Todoist_Automation
 
         }
 
-        public async void AddReadingTask(string projectName, string bookName, DateTime startDate, DateTime dueDate, int chapters)
+        public async void AddReadingTask(string projectName, string bookName, DateTime startDate, DateTime dueDate, int lastChapter, int firstChapter)
         {
             //Gets all projects and finds the choosen
             var projects = await client.Projects.GetAsync();
@@ -181,21 +179,22 @@ namespace Todoist_Automation
                     var transaction = client.CreateTransaction();
 
                     //Adds main task
-                    var quickAddItem = new QuickAddItem("Läs \"" + bookName + "\" @Läsning @KTH #" + projectName);
+                    var quickAddItem = new QuickAddItem("Läs \"" + bookName + "\" @Läsning #" + projectName);
                     var task = await client.Items.QuickAddAsync(quickAddItem);
                     task.DueDate = new DueDate(dueDate.Day + "/" + dueDate.Month);
                     await client.Items.UpdateAsync(task);
 
                     //Calculates how many days we have per chapter
+                    int chaptersToRead = lastChapter - firstChapter;
                     int daysToDeadline = BusinessDaysUntil(startDate.Date, dueDate.Date);
-                    int daysPerChapter = daysToDeadline / chapters;
+                    int daysPerChapter = daysToDeadline / chaptersToRead;
 
                     var nextDueDate = startDate;
 
-                    for (int i = 1; i <= chapters; i++)
+                    for (int i = firstChapter; i <= lastChapter; i++)
                     {
                         //Moves the duedate forward
-                        nextDueDate = nextDueDate.AddDays(daysPerChapter + (i % 2) * (daysToDeadline % chapters));
+                        nextDueDate = nextDueDate.AddDays(daysPerChapter + (i % 2) * (daysToDeadline % lastChapter));
 
                         //Ignores saturdays and sundays
                         if (nextDueDate.DayOfWeek == System.DayOfWeek.Saturday)
@@ -205,7 +204,7 @@ namespace Todoist_Automation
 
 
                         //Adds the chapter as a subtask with suptasks of its own
-                        var quickAddSub = new QuickAddItem("Kapitel " + i + " #" + projectName);
+                        var quickAddSub = new QuickAddItem("Kapitel " + i);
                         var subtask = await client.Items.QuickAddAsync(quickAddSub);
                         subtask.DueDate = new DueDate(nextDueDate.Day + "/" + nextDueDate.Month);
                         await client.Items.UpdateAsync(subtask);
@@ -266,5 +265,7 @@ namespace Todoist_Automation
 
             return businessDays;
         }
+
+
     }
 }

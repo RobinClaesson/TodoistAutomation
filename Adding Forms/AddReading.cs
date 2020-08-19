@@ -62,10 +62,22 @@ namespace Todoist_Automation
 
         public string ProjectName { get { return comboBox_Project.Text; } }
         public string BookName { get { return textBox_Book.Text; } }
-        public int Chapters { get { return (int)numericUpDown_Chapters.Value; } }
+
+        public int FirstChapter { get { return (int)numericUpDown_FirstChapter.Value; } }
+        public int LastChapter { get { return (int)numericUpDown_LastChapters.Value; } }
         public DateTime StartDate { get { return dateTimePicker_Start.Value; } }
         public DateTime DueDate { get { return dateTimePicker_Due.Value; } }
 
+        private void numericUpDown_LastChapters_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown_LastChapters.Value < numericUpDown_FirstChapter.Value)
+                numericUpDown_LastChapters.Value = numericUpDown_FirstChapter.Value;
+        }
 
+        private void numericUpDown_FirstChapter_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown_LastChapters.Value < numericUpDown_FirstChapter.Value)
+                numericUpDown_LastChapters.Value = numericUpDown_FirstChapter.Value;
+        }
     }
 }

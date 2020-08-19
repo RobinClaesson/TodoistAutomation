@@ -185,7 +185,7 @@ namespace Todoist_Automation
                     await client.Items.UpdateAsync(task);
 
                     //Calculates how many days we have per chapter
-                    int chaptersToRead = lastChapter - firstChapter;
+                    int chaptersToRead = lastChapter - (firstChapter-1);
                     int daysToDeadline = BusinessDaysUntil(startDate.Date, dueDate.Date);
                     int daysPerChapter = daysToDeadline / chaptersToRead;
 

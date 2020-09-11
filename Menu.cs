@@ -154,8 +154,8 @@ namespace Todoist_Automation
                     var sub2ID = await transaction.Items.AddAsync(new Item("Renskriv", proj.Id));
                     await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub2ID, task.Id));
 
-                    var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
-                    await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, task.Id));
+                    //var sub3ID = await transaction.Items.AddAsync(new Item("Samanfatta", proj.Id));
+                    //await transaction.Items.MoveAsync(ItemMoveArgument.CreateMoveToParent(sub3ID, task.Id));
 
                     //Sends the rest of the data to server
                     await transaction.CommitAsync();
